@@ -4,6 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -18,7 +20,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,30 +53,38 @@ import com.example.engenhariadesistemas.ui.theme.DarkPurple
 import com.example.engenhariadesistemas.ui.theme.DarkRed
 import kotlin.math.abs
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontStyle
+import com.example.engenhariadesistemas.BottomMenuContent
 
 
 @Composable
-fun HomeScreen(){
-    Text(
-        text = "Dados Vitais",
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold
-    )
-    Box(
-        modifier = Modifier
-            .background(Creme)
-            .fillMaxSize()
-            .padding(top = 30.dp)
-            .padding(5.dp)
-    ){
+fun HomeScreen() {
+    Scaffold(
+        bottomBar = {
+            BottomMenu(
+                items = listOf(
+                    BottomMenuContent("Home", ImageVector.vectorResource(R.drawable.heart_icon)),
+                    BottomMenuContent("Home", ImageVector.vectorResource(R.drawable.heart_icon)),
+                    BottomMenuContent("Home", ImageVector.vectorResource(R.drawable.heart_icon))
+                ),
+                lightColor = Color.White,
+                darkColor = Creme
+            )
+        },
+        containerColor = Creme
+    ) { innerPadding ->
         Column(
-
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .padding(15.dp)
         ) {
             Text(
                 text = "Dados Vitais",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold
             )
+
             Row {
                 Graph(
                     nome = "Heart Rate",
@@ -79,11 +93,8 @@ fun HomeScreen(){
                     unit = "bpm",
                     lightColor = LightRed,
                     darkColor = DarkRed,
-                    isNormal = {
-                        it in 60..100
-                    },
-                    modifier = Modifier
-                        .weight(1f)
+                    isNormal = { it in 60..100 },
+                    modifier = Modifier.weight(1f)
                 )
                 Graph(
                     nome = "Respiratory Rate",
@@ -92,11 +103,8 @@ fun HomeScreen(){
                     unit = "rpm",
                     lightColor = LightPurple,
                     darkColor = DarkPurple,
-                    isNormal = {
-                        it in 12..20
-                    },
-                    modifier = Modifier
-                        .weight(1f)
+                    isNormal = { it in 12..20 },
+                    modifier = Modifier.weight(1f)
                 )
             }
 
@@ -107,6 +115,86 @@ fun HomeScreen(){
             Location()
         }
     }
+}
+
+@Composable
+fun BottomMenu(
+    items : List<BottomMenuContent>,
+    modifier : Modifier = Modifier,
+    darkColor: Color,
+    lightColor: Color,
+    initialSelectedItemId: Int = 0
+){
+    var selectedItemId by remember {
+        mutableStateOf(
+            initialSelectedItemId
+        )
+    }
+
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Color.White)
+            .padding(15.dp)
+    ){
+        items.forEachIndexed{ id, item ->
+            BottomMenuItem(
+                item = item,
+                isSelected = id == selectedItemId,
+                lightColor = lightColor,
+                darkColor = darkColor
+            ) {
+                selectedItemId = id
+            }
+
+        }
+    }
+
+
+}
+
+@Composable
+fun BottomMenuItem(
+    item: BottomMenuContent,
+    isSelected: Boolean = false,
+    darkColor: Color,
+    lightColor: Color,
+    onItemClick: () -> Unit
+){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+
+    ){
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .clip(RoundedCornerShape(7.dp))
+                .clickable {
+                    onItemClick()
+                }
+                .background(if(isSelected) darkColor else Color.Transparent)
+                .padding(10.dp)
+
+        ){
+            Icon(
+                imageVector = item.icon,
+                contentDescription = item.title,
+                tint = Color.Black,
+                modifier = Modifier
+                    .size(30.dp)
+            )
+        }
+        Text(
+            text = item.title,
+            fontSize = 10.sp,
+            fontWeight = if(isSelected) FontWeight.Bold else FontWeight.Normal,
+            color = Color.Black
+        )
+    }
+
 }
 
 fun Path.waveUtil(from : Offset, to : Offset){
