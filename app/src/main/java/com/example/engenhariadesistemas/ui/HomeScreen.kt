@@ -63,9 +63,9 @@ fun HomeScreen() {
         bottomBar = {
             BottomMenu(
                 items = listOf(
-                    BottomMenuContent("Home", ImageVector.vectorResource(R.drawable.heart_icon)),
-                    BottomMenuContent("Home", ImageVector.vectorResource(R.drawable.heart_icon)),
-                    BottomMenuContent("Home", ImageVector.vectorResource(R.drawable.heart_icon))
+                    BottomMenuContent("Dados Rapidos", ImageVector.vectorResource(R.drawable.home_icon)),
+                    BottomMenuContent("Historico", ImageVector.vectorResource(R.drawable.history_icon)),
+                    BottomMenuContent("Iformações da Pulseira", ImageVector.vectorResource(R.drawable.bracelet_info_incon))
                 ),
                 lightColor = Color.White,
                 darkColor = Creme
@@ -79,10 +79,17 @@ fun HomeScreen() {
                 .fillMaxSize()
                 .padding(15.dp)
         ) {
+            Spacer(
+                Modifier.height(10.dp)
+            )
             Text(
                 text = "Dados Vitais",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold
+            )
+
+            Spacer(
+                Modifier.height(30.dp)
             )
 
             Row {
@@ -107,10 +114,16 @@ fun HomeScreen() {
                     modifier = Modifier.weight(1f)
                 )
             }
+            Spacer(
+                Modifier.height(25.dp)
+            )
 
             Text(
                 text = "Localização do Paciente",
                 fontSize = 20.sp
+            )
+            Spacer(
+                Modifier.height(25.dp)
             )
             Location()
         }
@@ -126,7 +139,7 @@ fun BottomMenu(
     initialSelectedItemId: Int = 0
 ){
     var selectedItemId by remember {
-        mutableStateOf(
+        mutableIntStateOf(
             initialSelectedItemId
         )
     }
@@ -163,6 +176,9 @@ fun BottomMenuItem(
     lightColor: Color,
     onItemClick: () -> Unit
 ){
+
+
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -190,8 +206,8 @@ fun BottomMenuItem(
         Text(
             text = item.title,
             fontSize = 10.sp,
-            fontWeight = if(isSelected) FontWeight.Bold else FontWeight.Normal,
-            color = Color.Black
+            fontWeight = FontWeight.Bold,
+            color = if(isSelected) Color.Black else Color.LightGray
         )
     }
 
@@ -382,7 +398,7 @@ fun Location(
         "Localização do Paciente",
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
+            .height(250.dp)
             .clip(RoundedCornerShape(20.dp))
                 ,
         contentScale = ContentScale.Crop
