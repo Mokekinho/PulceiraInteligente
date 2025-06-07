@@ -1,6 +1,5 @@
-package com.example.engenhariadesistemas.ui
+package com.example.engenhariadesistemas.ui.screens
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,8 +21,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,12 +31,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.draw
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -52,8 +45,6 @@ import com.example.engenhariadesistemas.R
 import com.example.engenhariadesistemas.ui.theme.DarkPurple
 import com.example.engenhariadesistemas.ui.theme.DarkRed
 import kotlin.math.abs
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontStyle
 import com.example.engenhariadesistemas.BottomMenuContent
 
 
