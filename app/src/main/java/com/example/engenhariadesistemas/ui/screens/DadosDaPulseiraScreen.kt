@@ -1,27 +1,35 @@
 package com.example.engenhariadesistemas.ui.screens
 
+
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.Interaction
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.PaddingValues
-
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.engenhariadesistemas.R
@@ -61,10 +69,179 @@ fun DadosDaPulseiraScreen(innerPadding: PaddingValues){
                 modifier = Modifier
                     .weight(1f)
             )
+        }
+        Row (
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            LocalizationInfo(
+                modifier = Modifier
+                    .weight(1f)
+            )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxSize()
+            ){
+                AcharPulseiraInfo()
+                AlertasInfo()
+            }
+        }
+
+    }
+}
+
+@Composable
+fun AlertasInfo(
+    modifier: Modifier = Modifier
+){
+    val infoIcon = ImageVector.vectorResource(R.drawable.info)
+
+    Box(
+        modifier = modifier
+            .padding(5.dp)
+            .height(70.dp)
+            .background(color = Color.White, shape = RoundedCornerShape(10.dp))
+    ){
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(5.dp)
+            ,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = infoIcon,
+                contentDescription = "Info Icon",
+                modifier = Modifier
+                    .weight(0.25f)
+                    .fillMaxSize()
+            )
+            Text(
+                "Sem alertas no dia de hoje ",
+                fontSize = 15.sp,
+                modifier = Modifier
+                    .weight(1f)
+            )
+        }
+    }
+
+
+
+}
+
+
+@Composable
+fun AcharPulseiraInfo(
+    modifier: Modifier = Modifier
+){
+
+    val watchIcon = ImageVector.vectorResource(R.drawable.watch_vibration)
+
+    Box(
+        modifier = modifier
+            .padding(5.dp)
+            .height(70.dp)
+            .background(color = Color.White, shape = RoundedCornerShape(10.dp))
+            .clickable {
+
+            }
+    ) {
+
+    Row(
+        modifier = Modifier
+            .fillMaxSize(),
+
+    ){
+        Icon(
+            imageVector = watchIcon,
+            contentDescription = "Relógio Vibrando",
+            modifier = Modifier
+                .weight(0.5f)
+                .fillMaxSize()
+        )
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxSize()
+            ,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                text = "Perdeu a pulseira?",
+                fontSize = 15.sp,
+            )
+            Text(
+                text = "Tocar som",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+
+    }
+}
+
+@Composable
+fun LocalizationInfo(
+
+    modifier: Modifier = Modifier,
+){
+    val pinIcon = ImageVector.vectorResource(R.drawable.pin_icon)
+
+    Box(
+        modifier = modifier
+            .padding(5.dp)
+            .height(150.dp)
+            .background(color = Color.White, shape = RoundedCornerShape(10.dp))
+
+    ){
+        Column (
+            modifier = Modifier
+                .fillMaxSize()
+        ){
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ){
+                Text(
+                    text = "Localização",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(5.dp)
+
+                )
+
+                Icon(
+                    imageVector = pinIcon,
+                    contentDescription = "Pin Icon",
+                    modifier = Modifier
+                        .size(35.dp)
+                        .padding(5.dp)
+                )
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(5.dp)
+                    .border(2.dp, color = Color.Black, shape = RoundedCornerShape(10.dp))
+            ){
+                Image(
+                    painter = painterResource(R.drawable.location),
+                    contentDescription = "Imagem de um Exemplo de Localização",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(10.dp))
+                        .fillMaxSize()
+                    ,
+                    contentScale = ContentScale.Crop
+                )
+            }
+
 
 
         }
-
     }
 }
 
