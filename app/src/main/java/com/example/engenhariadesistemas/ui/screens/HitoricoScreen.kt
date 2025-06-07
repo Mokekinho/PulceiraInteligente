@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.engenhariadesistemas.ui.components.Title
 import com.example.engenhariadesistemas.ui.components.TopAppBar
 import com.example.engenhariadesistemas.ui.theme.DarkRed
 import com.example.engenhariadesistemas.ui.theme.Green
@@ -35,7 +36,7 @@ fun HistoricoScreen(innerPadding: PaddingValues){
             .fillMaxSize()
             .padding(15.dp)
     ) {
-        TopAppBar("Histórico")
+        Title("Histórico")
 
         Historico(
             title = "Hoje",

@@ -11,6 +11,7 @@ import com.example.engenhariadesistemas.model.BottomMenuContent
 import com.example.engenhariadesistemas.navigation.AppNavGraph
 import com.example.engenhariadesistemas.navigation.Routes
 import com.example.engenhariadesistemas.ui.components.BottomMenu
+import com.example.engenhariadesistemas.ui.components.TopAppBar
 
 
 @Composable
@@ -23,6 +24,9 @@ fun MainScreen() {
     )
 
     Scaffold(
+        topBar = {
+            TopAppBar()
+        },
         bottomBar = {
             BottomMenu(
                 items = items,

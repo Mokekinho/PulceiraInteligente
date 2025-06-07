@@ -47,6 +47,7 @@ import com.example.engenhariadesistemas.ui.theme.DarkPurple
 import com.example.engenhariadesistemas.ui.theme.DarkRed
 import kotlin.math.abs
 import com.example.engenhariadesistemas.model.BottomMenuContent
+import com.example.engenhariadesistemas.ui.components.Title
 import com.example.engenhariadesistemas.ui.components.TopAppBar
 
 
@@ -58,7 +59,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
             .fillMaxSize()
             .padding(15.dp)
     ) {
-        TopAppBar("Dados Vitais")
+        Title("Dados Vitais")
 
         Row {
             Graph(

@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.engenhariadesistemas.ui.components.Title
+import com.example.engenhariadesistemas.ui.components.TopAppBar
 
 @Composable
 fun DadosDaPulseiraScreen(innerPadding: PaddingValues){
@@ -14,7 +17,8 @@ fun DadosDaPulseiraScreen(innerPadding: PaddingValues){
         modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
+            .padding(15.dp)
     ){
-        Text("Dados da Pulseira")
+        Title("Status da pulseira")
     }
 }
