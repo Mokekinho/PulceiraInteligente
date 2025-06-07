@@ -1,6 +1,5 @@
-package com.example.engenhariadesistemas
+package com.example.engenhariadesistemas.model
 
-import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class BottomMenuContent(

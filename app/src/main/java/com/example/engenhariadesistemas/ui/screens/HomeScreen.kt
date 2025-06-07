@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,163 +46,55 @@ import com.example.engenhariadesistemas.R
 import com.example.engenhariadesistemas.ui.theme.DarkPurple
 import com.example.engenhariadesistemas.ui.theme.DarkRed
 import kotlin.math.abs
-import com.example.engenhariadesistemas.BottomMenuContent
+import com.example.engenhariadesistemas.model.BottomMenuContent
+import com.example.engenhariadesistemas.ui.components.TopAppBar
 
 
 @Composable
-fun HomeScreen() {
-    Scaffold(
-        bottomBar = {
-            BottomMenu(
-                items = listOf(
-                    BottomMenuContent("Dados Rapidos", ImageVector.vectorResource(R.drawable.home_icon)),
-                    BottomMenuContent("Historico", ImageVector.vectorResource(R.drawable.history_icon)),
-                    BottomMenuContent("Iformações da Pulseira", ImageVector.vectorResource(R.drawable.bracelet_info_incon))
-                ),
-                lightColor = Color.White,
-                darkColor = Creme
-            )
-        },
-        containerColor = Creme
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .padding(15.dp)
-        ) {
-            Spacer(
-                Modifier.height(10.dp)
-            )
-            Text(
-                text = "Dados Vitais",
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(
-                Modifier.height(30.dp)
-            )
-
-            Row {
-                Graph(
-                    nome = "Heart Rate",
-                    icon = ImageVector.vectorResource(id = R.drawable.heart_icon),
-                    value = 98,
-                    unit = "bpm",
-                    lightColor = LightRed,
-                    darkColor = DarkRed,
-                    isNormal = { it in 60..100 },
-                    modifier = Modifier.weight(1f)
-                )
-                Graph(
-                    nome = "Respiratory Rate",
-                    icon = ImageVector.vectorResource(id = R.drawable.pulmonology_icon),
-                    value = 15,
-                    unit = "rpm",
-                    lightColor = LightPurple,
-                    darkColor = DarkPurple,
-                    isNormal = { it in 12..20 },
-                    modifier = Modifier.weight(1f)
-                )
-            }
-            Spacer(
-                Modifier.height(25.dp)
-            )
-
-            Text(
-                text = "Localização do Paciente",
-                fontSize = 20.sp
-            )
-            Spacer(
-                Modifier.height(25.dp)
-            )
-            Location()
-        }
-    }
-}
-
-@Composable
-fun BottomMenu(
-    items : List<BottomMenuContent>,
-    modifier : Modifier = Modifier,
-    darkColor: Color,
-    lightColor: Color,
-    initialSelectedItemId: Int = 0
-){
-    var selectedItemId by remember {
-        mutableIntStateOf(
-            initialSelectedItemId
-        )
-    }
-
-    Row(
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .padding(15.dp)
-    ){
-        items.forEachIndexed{ id, item ->
-            BottomMenuItem(
-                item = item,
-                isSelected = id == selectedItemId,
-                lightColor = lightColor,
-                darkColor = darkColor
-            ) {
-                selectedItemId = id
-            }
-
-        }
-    }
-
-
-}
-
-@Composable
-fun BottomMenuItem(
-    item: BottomMenuContent,
-    isSelected: Boolean = false,
-    darkColor: Color,
-    lightColor: Color,
-    onItemClick: () -> Unit
-){
-
-
-
+fun HomeScreen(innerPadding: PaddingValues) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .padding(innerPadding)
+            .fillMaxSize()
+            .padding(15.dp)
+    ) {
+        TopAppBar("Dados Vitais")
 
-    ){
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .clip(RoundedCornerShape(7.dp))
-                .clickable {
-                    onItemClick()
-                }
-                .background(if(isSelected) darkColor else Color.Transparent)
-                .padding(10.dp)
-
-        ){
-            Icon(
-                imageVector = item.icon,
-                contentDescription = item.title,
-                tint = Color.Black,
-                modifier = Modifier
-                    .size(30.dp)
+        Row {
+            Graph(
+                nome = "Heart Rate",
+                icon = ImageVector.vectorResource(id = R.drawable.heart_icon),
+                value = 98,
+                unit = "bpm",
+                lightColor = LightRed,
+                darkColor = DarkRed,
+                isNormal = { it in 60..100 },
+                modifier = Modifier.weight(1f)
+            )
+            Graph(
+                nome = "Respiratory Rate",
+                icon = ImageVector.vectorResource(id = R.drawable.pulmonology_icon),
+                value = 15,
+                unit = "rpm",
+                lightColor = LightPurple,
+                darkColor = DarkPurple,
+                isNormal = { it in 12..20 },
+                modifier = Modifier.weight(1f)
             )
         }
-        Text(
-            text = item.title,
-            fontSize = 10.sp,
-            fontWeight = FontWeight.Bold,
-            color = if(isSelected) Color.Black else Color.LightGray
+        Spacer(
+            Modifier.height(25.dp)
         )
-    }
 
+        Text(
+            text = "Localização do Paciente",
+            fontSize = 20.sp
+        )
+        Spacer(
+            Modifier.height(25.dp)
+        )
+        Location()
+    }
 }
 
 fun Path.waveUtil(from : Offset, to : Offset){
