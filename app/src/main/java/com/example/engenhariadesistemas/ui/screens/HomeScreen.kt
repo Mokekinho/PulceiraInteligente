@@ -291,10 +291,3 @@ fun Location(
 
 
 }
-
-@Composable
-fun NavigationIcon(
-
-){
-
-}
