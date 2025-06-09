@@ -70,23 +70,33 @@ fun DadosDaPulseiraScreen(innerPadding: PaddingValues){
                     .weight(1f)
             )
         }
+        LocalizationInfo(
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+
+// Linha com "Achar Pulseira" e "Sem Alertas"
         Row (
             modifier = Modifier
                 .fillMaxWidth()
         ){
-            LocalizationInfo(
+            AcharPulseiraInfo(
                 modifier = Modifier
                     .weight(1f)
             )
-            Column(
+            AlertasInfo(
                 modifier = Modifier
                     .weight(1f)
-                    .fillMaxSize()
-            ){
-                AcharPulseiraInfo()
-                AlertasInfo()
-            }
+            )
         }
+
+// Botão de desconectar
+        DesconectarPulseiraButton(
+            onClick = {
+                // Chamada da navegação aqui
+                // Ex: navController.navigate("conectar_pulseira")
+            }
+        )
 
     }
 }
@@ -157,7 +167,7 @@ fun AcharPulseiraInfo(
             imageVector = watchIcon,
             contentDescription = "Relógio Vibrando",
             modifier = Modifier
-                .weight(0.5f)
+                .weight(0.3f)
                 .fillMaxSize()
         )
         Column(
@@ -268,7 +278,7 @@ fun InteractionInfo(
                 imageVector = interactionIcon,
                 contentDescription = "Icone de Bateria",
                 modifier = Modifier
-                    .weight(0.5f)
+                    .weight(0.3f)
                     .fillMaxSize()
             )
             Column(
@@ -400,5 +410,26 @@ fun BatteryInfo(
 
 
 
+    }
+}
+
+@Composable
+fun DesconectarPulseiraButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .padding(5.dp)
+            .fillMaxWidth()
+            .height(60.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(color = Color.White)
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = "Desconectar pulseira",
+            color = Color.Red,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp
+        )
     }
 }
