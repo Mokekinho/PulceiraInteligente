@@ -32,13 +32,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.engenhariadesistemas.R
+import com.example.engenhariadesistemas.navigation.Routes
 import com.example.engenhariadesistemas.ui.components.Title
 import com.example.engenhariadesistemas.ui.theme.Green
 import java.util.Locale
 
 @Composable
-fun DadosDaPulseiraScreen(innerPadding: PaddingValues){
+fun DadosDaPulseiraScreen(
+    innerPadding: PaddingValues,
+    navController: NavHostController
+){
     Column (
         modifier = Modifier
             .padding(innerPadding)
@@ -94,6 +99,7 @@ fun DadosDaPulseiraScreen(innerPadding: PaddingValues){
         DesconectarPulseiraButton(
             onClick = {
                 // Chamada da navegação aqui
+                navController.navigate(Routes.CONECTAR_PULSEIRA)
                 // Ex: navController.navigate("conectar_pulseira")
             }
         )

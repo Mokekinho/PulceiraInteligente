@@ -24,7 +24,8 @@ fun MainScreen() {
     val items = listOf(
         BottomMenuContent("Dados Rapidos", ImageVector.vectorResource(R.drawable.home_icon)),
         BottomMenuContent("Historico", ImageVector.vectorResource(R.drawable.history_icon)),
-        BottomMenuContent("Informações", ImageVector.vectorResource(R.drawable.bracelet_info_incon))
+        BottomMenuContent("Informações", ImageVector.vectorResource(R.drawable.bracelet_info_incon)),
+        BottomMenuContent("Bem-estar", ImageVector.vectorResource(R.drawable.digital_wellbeing))
     )
 
     Scaffold(
@@ -43,7 +44,8 @@ fun MainScreen() {
                     val route = when (index) {
                         0 -> Routes.HOME
                         1 -> Routes.HISTORICO
-                        else -> Routes.PULSEIRA
+                        2 -> Routes.PULSEIRA
+                        else -> Routes.BEM_ESTAR
                     }
                     navController.navigate(route) {
                         launchSingleTop = true

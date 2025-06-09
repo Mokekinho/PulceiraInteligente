@@ -21,9 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.engenhariadesistemas.navigation.Routes
 
 @Composable
-fun ConectarPulseiraScreen() {
+fun ConectarPulseiraScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -74,12 +76,22 @@ fun ConectarPulseiraScreen() {
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        PulseiraItem(nome = "Pulseira", id = "#B345")
+        PulseiraItem(
+            nome = "Pulseira",
+            id = "#B345",
+            onClick = {
+            navController.navigate(Routes.HOME)
+        }
+        )
     }
 }
 
 @Composable
-fun PulseiraItem(nome: String, id: String) {
+fun PulseiraItem(
+    nome: String,
+    id: String,
+    onClick : () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -98,7 +110,9 @@ fun PulseiraItem(nome: String, id: String) {
             modifier = Modifier
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color(0xFFEAF4EF))
-                .clickable { /* ação de conectar */ }
+                .clickable {
+                    onClick()
+                }
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(text = "Conectar", fontSize = 14.sp, color = Color.Black)

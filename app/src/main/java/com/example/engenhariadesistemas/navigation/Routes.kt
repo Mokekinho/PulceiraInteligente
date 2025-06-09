@@ -5,4 +5,5 @@ object Routes {
     const val HISTORICO = "historico"
     const val PULSEIRA = "pulseira"
     const val CONECTAR_PULSEIRA = "conectar_pulseira"
+    const val BEM_ESTAR = "bem-estar"
 }
